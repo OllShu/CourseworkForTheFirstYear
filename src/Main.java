@@ -15,10 +15,56 @@ public class Main {
         employeesList[9] = new Employee("Соколов Илья Ильич", 5, 63800);
 
         printEmployeesList(employeesList);
+
+        System.out.println("Затраты на зарплаты в месяц составили "+countSumSalary(employeesList)+" рублей.");
+        System.out.println("Сотрудник с минимальной зарплатой - "+countEmployeeMinSalary(employeesList));
+        System.out.println("Сотрудник с максимальной зарплатой - "+countEmployeeMaxSalary(employeesList));
+        System.out.println("Средняя зарплата - "+countAverageSalary(employeesList));
+        printFullname(employeesList);
     }
     public static void printEmployeesList (Employee[] employeesList) {
         for (int i = 0; i < employeesList.length; i++) {
             System.out.println(employeesList[i]);
+        }
+    }
+
+    public static int countSumSalary (Employee[] employeesList) {
+        int sumSalary = 0;
+        for (Employee employee: employeesList) {
+          sumSalary = sumSalary + employee.getSalary();
+        }
+        return sumSalary;
+    }
+    public static String countEmployeeMinSalary (Employee[] employeesList) {
+        String employeeMinSalary = employeesList[0].getFullname();
+        int minSalary = employeesList[0].getSalary();
+        for (int i = 0; i < employeesList.length; i++) {
+                if (employeesList[i].getSalary() < minSalary){
+                minSalary = employeesList[i].getSalary();
+                employeeMinSalary = employeesList[i].getFullname();
+                }
+        }
+        return employeeMinSalary;
+    }
+    public static String countEmployeeMaxSalary (Employee[] employeesList) {
+        String employeeMaxSalary = employeesList[0].getFullname();
+        int maxSalary = employeesList[0].getSalary();
+        for (int i = 0; i < employeesList.length; i++) {
+            if (employeesList[i].getSalary() > maxSalary) {
+                maxSalary = employeesList[i].getSalary();
+                employeeMaxSalary = employeesList[i].getFullname();
+            }
+        }
+        return employeeMaxSalary;
+    }
+
+    public static int countAverageSalary (Employee[] employeesList) {
+        int averageSalary = countSumSalary(employeesList)/employeesList.length;
+        return averageSalary;
+    }
+    public static void printFullname (Employee[] employeesList) {
+        for (int i = 0; i < employeesList.length; i++) {
+            System.out.println((i+1) + " " + employeesList[i].getFullname());
         }
     }
 
